@@ -31,7 +31,7 @@ jobs:
           docker buildx build \
             --file app/Dockerfile \
             --tag royvishu1224/plot-test:${{ steps.git-sha.outputs.sha }} \
-            --push /app/
+            --push app/
 
       - name: Update Kustomization file
         run: |

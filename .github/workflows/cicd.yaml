@@ -26,12 +26,19 @@ jobs:
         id: git-sha
         run: echo "::set-output name=sha::$(git rev-parse --short HEAD)"
 
+
       - name: Build and push Docker image
         run: |
           docker buildx build \
             --file app/Dockerfile \
             --tag royvishu1224/plot-test:${{ steps.git-sha.outputs.sha }} \
             --push app/
+      
+
+      - name: Clone repository
+        run: |
+          git clone https://github.com/vishu-roy12/plot-test.git
+          cd plot-test
 
       - name: Update Kustomization file
         run: |

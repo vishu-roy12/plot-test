@@ -1,0 +1,47 @@
+name: Docker Build, Push & Kustomization PR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_push_and_create_pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Get Git SHA
+        id: git-sha
+        run: echo "::set-output name=sha::$(git rev-parse --short HEAD)"
+
+      - name: Build and push Docker image
+        run: |
+          docker buildx build \
+            --file Dockerfile \
+            --tag royvishu1224/plot-test:${{ steps.git-sha.outputs.sha }} \
+            --push .
+
+      - name: Update Kustomization file
+        run: |
+          kustomize edit set image royvishu1224/plot-test:${{ steps.git-sha.outputs.sha }}=base/kustomization.yaml
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Update image reference to Git SHA"
+          title: "Update image reference to Git SHA"
+          branch: update-image-reference-${{ steps.git-sha.outputs.sha }}
+          body: "This pull request updates the image reference in the Kustomization file to the Git SHA: ${{ steps.git-sha.outputs.sha }}"

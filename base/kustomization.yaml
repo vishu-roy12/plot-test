@@ -3,8 +3,8 @@ kind: Kustomization
 
 images:
 - name: royvishu1224/plot-test
-  newTag: latest
+  newTag: 1ac799a
 
 resources:
-  - service.yaml
-  - deployment.yaml
+- service.yaml
+- deployment.yaml

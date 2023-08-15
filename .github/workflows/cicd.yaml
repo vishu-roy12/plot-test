@@ -47,7 +47,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN }}
           commit-message: "Update image reference to Git SHA"
           title: "Update image reference to Git SHA"
           branch: update-image-reference-${{ steps.git-sha.outputs.sha }}

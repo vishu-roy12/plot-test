@@ -42,7 +42,7 @@ jobs:
 
       - name: Update Kustomization file
         run: |
-          kustomize edit set image royvishu1224/plot-test:${{ steps.git-sha.outputs.sha }} base/kustomization.yaml
+          cd base && kustomize edit set image royvishu1224/plot-test:${{ steps.git-sha.outputs.sha }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3

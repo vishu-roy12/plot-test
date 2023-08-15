@@ -3,7 +3,7 @@ kind: Kustomization
 
 images:
 - name: royvishu1224/plot-test
-  newTag: 590cb04
+  newTag: b3823f7
 
 resources:
 - service.yaml

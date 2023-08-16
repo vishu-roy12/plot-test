@@ -1,4 +1,4 @@
-name: Docker Build, Push & Kustomization PR
+name: CI pipeline
 
 on:
   push:
@@ -35,14 +35,14 @@ jobs:
             --push app/
       
 
-      - name: Clone repository
-        run: |
-          git clone https://github.com/vishu-roy12/plot-test.git
-          cd plot-test
+      # - name: Clone repository
+      #   run: |
+      #     git clone https://github.com/vishu-roy12/plot-test.git
+      #     cd plot-test
 
       - name: Update Kustomization file
         run: |
-          cd base && kustomize edit set image royvishu1224/plot-test:${{ steps.git-sha.outputs.sha }}
+          cd dev && kustomize edit set image royvishu1224/plot-test:${{ steps.git-sha.outputs.sha }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3

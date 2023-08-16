@@ -12,7 +12,7 @@ app.config["MYSQL_DATABASE_USER"] = "root"
 app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv("db_root_password")
 app.config["MYSQL_DATABASE_DB"] = os.getenv("db_name")
 app.config["MYSQL_DATABASE_HOST"] = os.getenv("host")
-app.config["MYSQL_DATABASE_PORT"] = int(os.getenv("port"))
+app.config["MYSQL_DATABASE_PORT"] = os.getenv("port")
 mysql.init_app(app)
 
 

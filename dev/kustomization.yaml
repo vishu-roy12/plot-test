@@ -4,7 +4,7 @@ namespace: default
 
 images:
 - name: royvishu1224/plot-test
-  newTag: 8405d24
+  newTag: edc9123
 
 
 patchesStrategicMerge:

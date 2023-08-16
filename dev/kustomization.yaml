@@ -4,11 +4,11 @@ namespace: worker-safety-integ
 
 images:
 - name: royvishu1224/plot-test
-  newTag: 1ac799a
+  newTag: bdaf7fa
 
-bases:
-  - ../base
 
 patchesStrategicMerge:
 - app-deployment.yaml
 - dev-mysql-deployment.yaml
+resources:
+- ../base

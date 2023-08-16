@@ -44,11 +44,11 @@ jobs:
         run: |
           cd dev && kustomize edit set image royvishu1224/plot-test:${{ steps.git-sha.outputs.sha }}
 
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.TOKEN }}
-          commit-message: "Update image reference to Git SHA"
-          title: "Update image reference to Git SHA"
-          branch: update-image-reference-${{ steps.git-sha.outputs.sha }}
-          body: "This pull request updates the image reference in the Kustomization file to the Git SHA: ${{ steps.git-sha.outputs.sha }}"
+      # - name: Create Pull Request
+      #   uses: peter-evans/create-pull-request@v3
+      #   with:
+      #     token: ${{ secrets.TOKEN }}
+      #     commit-message: "Update image reference to Git SHA"
+      #     title: "Update image reference to Git SHA"
+      #     branch: update-image-reference-${{ steps.git-sha.outputs.sha }}
+      #     body: "This pull request updates the image reference in the Kustomization file to the Git SHA: ${{ steps.git-sha.outputs.sha }}"

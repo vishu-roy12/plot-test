@@ -36,12 +36,12 @@ spec:
               secretKeyRef:
                 name: db-creds
                 key: db_root_password
-          - name: MYSQL_SERVICE_HOST
+          - name: MYSQL_DATABASE_HOST
             valueFrom:
               secretKeyRef:
                 name: db-creds
                 key: host
-          - name: MYSQL_SERVICE_PORT
+          - name: MYSQL_DATABASE_PORT
             valueFrom:
               secretKeyRef:
                 name: db-creds

@@ -37,15 +37,17 @@ spec:
                 name: db-creds
                 key: db_root_password
           - name: MYSQL_DATABASE_HOST
-            valueFrom:
-              secretKeyRef:
-                name: db-creds
-                key: host
+            value: mysql.default.svc.cluster.local
+            # valueFrom:
+            #   secretKeyRef:
+            #     name: db-creds
+            #     key: host
           - name: MYSQL_DATABASE_PORT
-            valueFrom:
-              secretKeyRef:
-                name: db-creds
-                key: port
+            value: '3306'
+            # valueFrom:
+            #   secretKeyRef:
+            #     name: db-creds
+            #     key: port
           # livenessProbe:
           #   httpGet:
           #     path: /liveness

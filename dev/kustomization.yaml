@@ -4,7 +4,7 @@ namespace: worker-safety-integ
 
 images:
 - name: royvishu1224/plot-test
-  newTag: bdaf7fa
+  newTag: a88486d
 
 
 patchesStrategicMerge:

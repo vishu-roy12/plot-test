@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: python-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: python-app
@@ -14,9 +14,10 @@ spec:
     spec:
       containers:
         - name: python-app
-          image: <image:tag>
+          image: royvishu1224/plot-test:6b8fed7
+          imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 80
+            - containerPort: 5000
           resources:
             requests:
               cpu: 200m
@@ -24,20 +25,41 @@ spec:
             limits:
               cpu: 300m
               memory: 128Mi
-          livenessProbe:
-            httpGet:
-              path: /liveness
-              port: 80
-            initialDelaySeconds: 0
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 1
-          readinessProbe:
-            httpGet:
-              path: /readiness
-              port: 80
-            initialDelaySeconds: 0
-            periodSeconds: 10
-            timeoutSeconds: 5
-            successThreshold: 1
-            failureThreshold: 1
+          env:
+          - name: MYSQL_DATABASE_DB
+            valueFrom:
+              secretKeyRef:
+                name: db-creds
+                key: db_name
+          - name: MYSQL_DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: db-creds
+                key: db_root_password
+          - name: MYSQL_SERVICE_HOST
+            valueFrom:
+              secretKeyRef:
+                name: db-creds
+                key: host
+          - name: MYSQL_SERVICE_PORT
+            valueFrom:
+              secretKeyRef:
+                name: db-creds
+                key: port
+          # livenessProbe:
+          #   httpGet:
+          #     path: /liveness
+          #     port: 5000
+          #   initialDelaySeconds: 0
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   failureThreshold: 1
+          # readinessProbe:
+          #   httpGet:
+          #     path: /readiness
+          #     port: 5000
+          #   initialDelaySeconds: 0
+          #   periodSeconds: 10
+          #   timeoutSeconds: 5
+          #   successThreshold: 1
+          #   failureThreshold: 1

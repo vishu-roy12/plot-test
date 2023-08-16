@@ -11,8 +11,8 @@ mysql = MySQL()
 app.config["MYSQL_DATABASE_USER"] = "root"
 app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv("db_root_password")
 app.config["MYSQL_DATABASE_DB"] = os.getenv("db_name")
-app.config["MYSQL_DATABASE_HOST"] = os.getenv("MYSQL_SERVICE_HOST")
-app.config["MYSQL_DATABASE_PORT"] = os.getenv("MYSQL_SERVICE_PORT")
+app.config["MYSQL_DATABASE_HOST"] = os.getenv("host")
+app.config["MYSQL_DATABASE_PORT"] = os.getenv("port")
 mysql.init_app(app)
 
 
@@ -55,7 +55,7 @@ def users():
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM users")
+        cursor.execute("SELECT User FROM mysql.user;")
         rows = cursor.fetchall()
         cursor.close()
         conn.close()
